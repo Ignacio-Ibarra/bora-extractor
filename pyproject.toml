@@ -1,0 +1,28 @@
+[project]
+name = "bora-extractor"
+version = "0.1.0"
+description = "Extrae texto de URL, parsea con Named Entity Recognition (NER) y guarda información en JSON"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy<2.0.0",
+    "spacy==3.7.5",
+    "beautifulsoup4",
+    "lxml",
+    "python-dotenv>=1.2.1",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.scripts]
+bora-extractor = "bora_extractor.main:main"
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-q"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
