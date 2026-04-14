@@ -1,6 +1,6 @@
 # bora-extractor
 
-Extractor modular para procesar avisos publicados en el Boletín Oficial de la República Argentina (BORA). El paquete descarga contenido HTML de publicaciones, extrae texto estructurado, normaliza caracteres Unicode y valida toda la información mediante esquemas Pydantic robustos.
+Extractor modular para procesar avisos publicados en el Boletín Oficial de la República Argentina (BORA). El paquete descarga contenido HTML de publicaciones, extrae texto estructurado, normaliza caracteres Unicode y valida toda la información mediante esquemas Pydantic robustos. Este paquete utiliza como input los archivos JSON que se generan mediante el paquete [`bora_wrapper`](https://github.com/Ignacio-ibarra/bora_wrapper). 
 
 ## Acerca de BORA
 
