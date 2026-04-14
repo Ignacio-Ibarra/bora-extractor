@@ -1,2 +1,13 @@
 uv.lock
 .env
+*.ipynb_checkpoints
+*/__pycache__/ 
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.ipynb
+output/
+*.egg-info/
+dist/

@@ -1,43 +1,47 @@
-from __future__ import annotations
-
-from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
+from pydantic import BaseModel
 
 
-@dataclass
-class Entity:
-    text: str
-    label: str
-    start_char: int
-    end_char: int
-    sentence: Optional[str] = None
+class JsonMetadata(BaseModel):
+    rubro: str
+    fecha_desde: str
+    fecha_hasta: str
 
-    def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
+class UrlMetadata(BaseModel):
+    url: str
+    id_aviso: str
+    fecha_aviso: str
 
+class DocumentMetadata(BaseModel):
+    titulo_aviso: str
+    cuerpo_aviso: str
+    url_metadata: UrlMetadata
+    json_metadata : JsonMetadata
 
-@dataclass
-class Relation:
-    subject: Dict[str, Any]
-    predicate: str
-    object: Dict[str, Any]
-    sentence: Optional[str] = None
-
-    def to_dict(self) -> Dict[str, Any]:
-        return asdict(self)
+class Result(BaseModel):
+    result: List[DocumentMetadata]
 
 
-@dataclass
-class ExtractedDocument:
-    metadata: Dict[str, Any]
-    text: str
-    entities: List[Entity] = field(default_factory=list)
-    relations: List[Relation] = field(default_factory=list)
+def validate_json_metadata(data: Dict[str, Any]) -> JsonMetadata:
+    try:
+        return JsonMetadata.model_validate(data)
+    except Exception as e:
+        raise ValueError(f"Invalid JSON metadata: {e}")
+    
+def validate_url_metadata(data: Dict[str, Any]) -> UrlMetadata:
+    try:
+        return UrlMetadata.model_validate(data)
+    except Exception as e:
+        raise ValueError(f"Invalid URL metadata: {e}")
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "metadata": self.metadata,
-            "text": self.text,
-            "entities": [entity.to_dict() for entity in self.entities],
-            "relations": [relation.to_dict() for relation in self.relations],
-        }
+def validate_document_metadata(data: Dict[str, Any]) -> DocumentMetadata:
+    try:
+        return DocumentMetadata.model_validate(data)
+    except Exception as e:
+        raise ValueError(f"Invalid document metadata: {e}")
+    
+def validate_result_metadata(data: Dict[str, Any]) -> Result:
+    try:
+        return Result.model_validate(data)
+    except Exception as e:
+        raise ValueError(f"Invalid result metadata: {e}")
