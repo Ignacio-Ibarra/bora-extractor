@@ -15,7 +15,7 @@ metadata_generator : Callable = lambda json_data, link: MetadataGenerator(json_d
                                                                         link=link, 
                                                                         seccion=BORA_SECCION, 
                                                                         json_metadata_keys=JSON_METADATA_KEYS,
-                                                                        default_id_fields=DEFAULT_ID_FIELDS)
+                                                                        div_id_fields=DEFAULT_ID_FIELDS)
 
 json_dir = Path(JSON_DIR)
 
