@@ -1,5 +1,5 @@
 from bora_extractor.metadata import MetadataGenerator, load_json_file, select_json_by_fields, build_result_metadata, formatear_fecha
-from bora_extractor.config import JSON_METADATA_KEYS, BORA_SECCION, JSON_DIR
+from bora_extractor.config import JSON_METADATA_KEYS, BORA_SECCION, JSON_DIR, DEFAULT_ID_FIELDS
 from bora_extractor.reqs import set_proxy_config
 import argparse
 from pathlib import Path
@@ -14,7 +14,8 @@ import time
 metadata_generator : Callable = lambda json_data, link: MetadataGenerator(json_data, 
                                                                         link=link, 
                                                                         seccion=BORA_SECCION, 
-                                                                        json_metadata_keys=JSON_METADATA_KEYS)
+                                                                        json_metadata_keys=JSON_METADATA_KEYS,
+                                                                        default_id_fields=DEFAULT_ID_FIELDS)
 
 json_dir = Path(JSON_DIR)
 
