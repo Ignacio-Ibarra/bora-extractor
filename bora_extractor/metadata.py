@@ -21,8 +21,6 @@ def select_json_file(dir: Path, pattern: Optional[str] = None) -> Optional[Path]
     if not dir.is_dir():
         raise ValueError(f"Directory {dir} is not a valid directory")
     
-    print(list(dir.glob("*.json")))
-    print(pattern)
     json_files = list(dir.glob(pattern or "*.json"))
     if not json_files:
         raise ValueError(f"No JSON files found in directory {dir} with pattern {pattern or '*.json'}")
