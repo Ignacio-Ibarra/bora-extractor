@@ -7,14 +7,18 @@ from bora_extractor.config import DEFAULT_HEADERS
 load_dotenv()
 
 
-def set_proxy_config()-> None:
-    proxy_host = os.getenv("PROXY_HOST")
-    proxy_port = os.getenv("PROXY_PORT")
-    proxy_user = os.getenv("PROXY_USER")
-    proxy_pass = os.getenv("PROXY_PASS")
+def set_proxy_config() -> None:
+    proxy_host = os.getenv("BORA_PROXY_HOST")
+    proxy_port = os.getenv("BORA_PROXY_PORT")
+    proxy_user = os.getenv("BORA_PROXY_USER")
+    proxy_pass = os.getenv("BORA_PROXY_PASS")
 
-    os.environ['HTTP_PROXY']= f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}" 
-    os.environ['HTTPS_PROXY'] = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
+    if not all([proxy_host, proxy_port, proxy_user, proxy_pass]):
+        return
+
+    proxy_url = f"http://{proxy_user}:{proxy_pass}@{proxy_host}:{proxy_port}"
+    os.environ['HTTP_PROXY'] = proxy_url
+    os.environ['HTTPS_PROXY'] = proxy_url
 
 
 def make_request(url: str, timeout: int = 15) -> Response:
